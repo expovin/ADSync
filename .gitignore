@@ -1,0 +1,8 @@
+#Secret and sensible data
+secret.js
+
+#logs files
+logs/
+
+#Node modules
+node_modules/
