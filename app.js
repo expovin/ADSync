@@ -68,7 +68,7 @@ function getUsers(param){
                         }
                             
                         else
-                            log.warn("organizationalUnit to exclode from further search --> ",entry.object.dn);
+                            log.warn("organizationalUnit to exclude from further search --> ",entry.object.dn);
                     }
 
                     if(entry.object.objectClass.indexOf("person") !== -1){
@@ -87,10 +87,11 @@ function getUsers(param){
             res.on('error', function(err) {
                 log.warn('searchFailed') ;
                 log.err('error: ' + err.message);
+                reject("Error getting data from the LDAP Server")
             });
             
             res.on('end', function(result) {
-                log.info(" --- SESSION END ---");
+                //log.info(" --- SESSION END ---");
                 db.insertUsersFromLDAP(allFilteredUsers);
                 fulfill("END SESSION");
             })
@@ -103,8 +104,8 @@ function getUsers(param){
 
 ldapConnection()
 .then(getUsers)
-.then( () =>{
-    log.info(" ---------- FINE ------------ ");
+.then( (msg) =>{
+    log.info(" ---------- "+msg+" ------------ ");
 })
 .catch( error => {
     log.error("Error : ",error);
