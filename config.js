@@ -24,7 +24,7 @@ module.exports = {
     */  
     Log : {
         OutputFileGeneral : "./logs/general.log",
-        DefaultLevel : "trace",
+        DefaultLevel : "info",
         maxLogSize : 10485760,
         backups : 12,
         compress : true,
